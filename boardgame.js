@@ -13,10 +13,7 @@ const load = () => {
     html += '<tr>';
     for (let col = 0; col < size; col++) {
       let id = row + '' + col;
-      html +=
-        '<td align="center" align="center" height="40" width="40" id="' +
-        id +
-        '"></td>';
+      html += '<td align="center" height="80" width="80" id="' + id + '"></td>';
     }
     html += '</tr>';
   }
@@ -56,15 +53,15 @@ const getId = () => {
 const up = () => {
   isMoved = false;
   excludeIds = [];
-  for (var j = min; j <= max; j++) {
-    for (var i = min; i <= max; i++) {
-      var id = i + '' + j;
+  for (let j = min; j <= max; j++) {
+    for (let i = min; i <= max; i++) {
+      let id = i + '' + j;
       if (document.getElementById(id).innerHTML != '') {
         moveUp(id);
       }
     }
   }
-  if (isMoved == true) {
+  if (isMoved) {
     update();
   }
   return false;
@@ -72,14 +69,14 @@ const up = () => {
 
 const moveUp = (id) => {
   if (!id.startsWith(min)) {
-    var arr = id.split('');
-    var i = parseInt(arr[0]);
-    var j = parseInt(arr[1]);
-    for (var k = i - 1; k >= min; k--) {
-      var nId = k + '' + j;
+    let arr = id.split('');
+    let i = parseInt(arr[0]);
+    let j = parseInt(arr[1]);
+    for (let k = i - 1; k >= min; k--) {
+      let nId = k + '' + j;
       if (document.getElementById(nId).innerHTML != '') {
-        var val = parseInt(document.getElementById(k + 1 + '' + j).innerHTML);
-        var nVal = parseInt(document.getElementById(nId).innerHTML);
+        let val = parseInt(document.getElementById(k + 1 + '' + j).innerHTML);
+        let nVal = parseInt(document.getElementById(nId).innerHTML);
         if (val == nVal) {
           if (excludeIds.indexOf(nId) == -1) {
             excludeIds.push(nId);
@@ -114,15 +111,15 @@ const moveUp = (id) => {
 const left = () => {
   isMoved = false;
   excludeIds = [];
-  for (var i = min; i <= max; i++) {
-    for (var j = min; j <= max; j++) {
-      var id = i + '' + j;
+  for (let i = min; i <= max; i++) {
+    for (let j = min; j <= max; j++) {
+      let id = i + '' + j;
       if (document.getElementById(id).innerHTML != '') {
         moveLeft(id);
       }
     }
   }
-  if (isMoved == true) {
+  if (isMoved) {
     update();
   }
   return false;
@@ -130,14 +127,14 @@ const left = () => {
 
 const moveLeft = (id) => {
   if (!id.endsWith(min)) {
-    var arr = id.split('');
-    var i = parseInt(arr[0]);
-    var j = parseInt(arr[1]);
-    for (var k = j - 1; k >= min; k--) {
-      var nId = i + '' + k;
+    let arr = id.split('');
+    let i = parseInt(arr[0]);
+    let j = parseInt(arr[1]);
+    for (let k = j - 1; k >= min; k--) {
+      let nId = i + '' + k;
       if (document.getElementById(nId).innerHTML != '') {
-        var val = parseInt(document.getElementById(i + '' + (k + 1)).innerHTML);
-        var nVal = parseInt(document.getElementById(nId).innerHTML);
+        let val = parseInt(document.getElementById(i + '' + (k + 1)).innerHTML);
+        let nVal = parseInt(document.getElementById(nId).innerHTML);
         if (val == nVal) {
           if (excludeIds.indexOf(nId) == -1) {
             excludeIds.push(nId);
@@ -172,15 +169,15 @@ const moveLeft = (id) => {
 const down = () => {
   isMoved = false;
   excludeIds = [];
-  for (var i = min; i <= max; i++) {
-    for (var j = max; j >= min; j--) {
-      var id = j + '' + i;
+  for (let i = min; i <= max; i++) {
+    for (let j = max; j >= min; j--) {
+      let id = j + '' + i;
       if (document.getElementById(id).innerHTML != '') {
         moveDown(id);
       }
     }
   }
-  if (isMoved == true) {
+  if (isMoved) {
     update();
   }
   return false;
@@ -287,25 +284,24 @@ const moveRight = (id) => {
 };
 
 const update = () => {
-  //Add new value
-  var ids = [];
-  for (var i = min; i <= max; i++) {
-    for (var j = min; j <= max; j++) {
-      var id = i + '' + j;
+  let ids = [];
+  for (let i = min; i <= max; i++) {
+    for (let j = min; j <= max; j++) {
+      let id = i + '' + j;
       if (document.getElementById(id).innerHTML == '') {
         ids.push(id);
       }
     }
   }
-  var id = ids[Math.floor(Math.random() * ids.length)];
+  id = ids[Math.floor(Math.random() * ids.length)];
   document.getElementById(id).innerHTML = '2';
   document.getElementById(id).style.backgroundColor = getColor(2);
 
   //Check if no move space available
-  var allFilled = true;
-  for (var i = min; i <= max; i++) {
-    for (var j = min; j <= max; j++) {
-      var id = i + '' + j;
+  let allFilled = true;
+  for (let i = min; i <= max; i++) {
+    for (let j = min; j <= max; j++) {
+      let id = i + '' + j;
       if (document.getElementById(id).innerHTML == '') {
         allFilled = false;
         break;
@@ -320,12 +316,12 @@ const update = () => {
 };
 
 const checkGameOver = () => {
-  var isOver = true;
-  for (var j = min; j <= max; j++) {
-    for (var i = min; i <= max - 1; i++) {
+  let isOver = true;
+  for (let j = min; j <= max; j++) {
+    for (let i = min; i <= max - 1; i++) {
       //alert(i+" "+j);
-      var val = parseInt(document.getElementById(i + '' + j).innerHTML);
-      var nVal = parseInt(document.getElementById(i + 1 + '' + j).innerHTML);
+      let val = parseInt(document.getElementById(i + '' + j).innerHTML);
+      let nVal = parseInt(document.getElementById(i + 1 + '' + j).innerHTML);
       if (val == nVal) {
         isOver = false;
         break;
@@ -333,11 +329,11 @@ const checkGameOver = () => {
     }
   }
   if (isOver == true) {
-    for (var i = min; i <= max; i++) {
-      for (var j = min; j <= max - 1; j++) {
+    for (let i = min; i <= max; i++) {
+      for (let j = min; j <= max - 1; j++) {
         //alert(i+" "+j);
-        var val = parseInt(document.getElementById(i + '' + j).innerHTML);
-        var nVal = parseInt(
+        let val = parseInt(document.getElementById(i + '' + j).innerHTML);
+        let nVal = parseInt(
           document.getElementById(i + '' + (j + 1)).innerHTML
         );
         if (val == nVal) {
@@ -354,7 +350,7 @@ const checkGameOver = () => {
 };
 
 const getColor = (val) => {
-  var color = '#ffffff';
+  let color = '#ffffff';
   switch (val) {
     case 2:
       color = '#F6CED8';
@@ -396,13 +392,13 @@ const getColor = (val) => {
 };
 
 if (typeof String.prototype.startsWith != 'function') {
-  String.prototype.startsWith = function (str) {
-    return this.substring(0, str.length) === str;
+  String.prototype.startsWith = (string) => {
+    return this.substring(0, string.length) === string;
   };
 }
 if (typeof String.prototype.endsWith != 'function') {
-  String.prototype.endsWith = function (str) {
-    return this.substring(this.length - str.length, this.length) === str;
+  String.prototype.endsWith = (string) => {
+    return this.substring(this.length - string.length, this.length) === string;
   };
 }
 document.onkeydown = function (e) {
