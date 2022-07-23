@@ -1,0 +1,27 @@
+*, * ::after, * ::before {
+    background-color: #F1F1F1;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#new-game-button {
+    border-radius: 5px;
+    background-color: #E2DCC8;
+}
+
+#score {
+    display: flex;
+    justify-content: center;
+}
