@@ -45,8 +45,8 @@ const getRandom = () => {
 };
 
 const getId = () => {
-  var i = getRandom();
-  var j = getRandom();
+  let i = getRandom();
+  let j = getRandom();
   return i + '' + j;
 };
 
@@ -185,14 +185,14 @@ const down = () => {
 
 const moveDown = (id) => {
   if (!id.startsWith(max)) {
-    var arr = id.split('');
-    var i = parseInt(arr[0]);
-    var j = parseInt(arr[1]);
-    for (var k = i + 1; k <= max; k++) {
-      var nId = k + '' + j;
+    let arr = id.split('');
+    let i = parseInt(arr[0]);
+    let j = parseInt(arr[1]);
+    for (let k = i + 1; k <= max; k++) {
+      let nId = k + '' + j;
       if (document.getElementById(nId).innerHTML != '') {
-        var val = parseInt(document.getElementById(k - 1 + '' + j).innerHTML);
-        var nVal = parseInt(document.getElementById(nId).innerHTML);
+        let val = parseInt(document.getElementById(k - 1 + '' + j).innerHTML);
+        let nVal = parseInt(document.getElementById(nId).innerHTML);
         if (val == nVal) {
           if (excludeIds.indexOf(nId) == -1) {
             excludeIds.push(nId);
@@ -227,15 +227,15 @@ const moveDown = (id) => {
 const right = () => {
   isMoved = false;
   excludeIds = [];
-  for (var i = min; i <= max; i++) {
-    for (var j = max; j >= min; j--) {
-      var id = i + '' + j;
+  for (let i = min; i <= max; i++) {
+    for (let j = max; j >= min; j--) {
+      let id = i + '' + j;
       if (document.getElementById(id).innerHTML != '') {
         moveRight(id);
       }
     }
   }
-  if (isMoved == true) {
+  if (isMoved) {
     update();
   }
   return false;
@@ -243,15 +243,15 @@ const right = () => {
 
 const moveRight = (id) => {
   if (!id.endsWith(max)) {
-    var arr = id.split('');
-    var i = parseInt(arr[0]);
-    var j = parseInt(arr[1]);
+    let arr = id.split('');
+    let i = parseInt(arr[0]);
+    let j = parseInt(arr[1]);
 
-    for (var k = j + 1; k <= max; k++) {
-      var nId = i + '' + k;
+    for (let k = j + 1; k <= max; k++) {
+      let nId = i + '' + k;
       if (document.getElementById(nId).innerHTML != '') {
-        var val = parseInt(document.getElementById(i + '' + (k - 1)).innerHTML);
-        var nVal = parseInt(document.getElementById(nId).innerHTML);
+        let val = parseInt(document.getElementById(i + '' + (k - 1)).innerHTML);
+        let nVal = parseInt(document.getElementById(nId).innerHTML);
         if (val == nVal) {
           if (excludeIds.indexOf(nId) == -1) {
             excludeIds.push(nId);
