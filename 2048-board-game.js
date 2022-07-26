@@ -5,56 +5,6 @@ let exclude = [];
 let score = 0;
 let isMove = false;
 
-const createCell = (id) => {
-  return (document
-    .getElementById('canvas')
-    .appendChild(document.createElement('div')).id = id);
-};
-
-const randomSpawn = () => {
-  let i, j;
-  i = Math.floor(Math.random() * size - min);
-  j = Math.floor(Math.random() * size - min);
-  return `${i}${j}`;
-};
-
-const randomValue = () => {
-  const value = ['2', '4'];
-  let randomValue = value[Math.floor(Math.random() * 2)];
-  return randomValue;
-};
-
-const load = () => {
-  document.getElementById('score').innerHTML = score;
-  for (let i = 0; i <= max; i++) {
-    for (let j = 0; j <= max; j++) {
-      createCell(`${i}${j}`);
-    }
-  }
-
-  for (let i = 0; i <= max; i++) {
-    for (let j = 0; j <= max; j++) {
-      document.getElementById(`${i}${j}`).classList.add('cell');
-    }
-  }
-  let firstSpawn = randomSpawn();
-  let secondSpawn = randomSpawn();
-  while (firstSpawn === secondSpawn) {
-    firstSpawn = randomSpawn();
-    secondSpawn = randomSpawn();
-  }
-  document.getElementById(`${firstSpawn}`).innerHTML = '2';
-  document.getElementById(`${secondSpawn}`).innerHTML = randomValue();
-
-  for (let i = 0; i <= max; i++) {
-    for (let j = 0; j <= max; j++) {
-      document.getElementById(`${i}${j}`).style.backgroundColor = getColor(
-        parseInt(document.getElementById(`${i}${j}`).innerHTML)
-      );
-    }
-  }
-};
-
 const getColor = (value) => {
   let color;
   switch (value) {
@@ -100,4 +50,79 @@ const getColor = (value) => {
   return color;
 };
 
+const createCellOnField = () => {
+  for (let i = 0; i <= max; i++) {
+    for (let j = 0; j <= max; j++) {
+      document
+        .getElementById('canvas')
+        .appendChild(document.createElement('div')).id = `${i}${j}`;
+    }
+  }
+  for (let i = 0; i <= max; i++) {
+    for (let j = 0; j <= max; j++) {
+      document.getElementById(`${i}${j}`).classList.add('cell');
+    }
+  }
+};
+
+const setScore = () => {
+  document.getElementById('score').innerHTML = score;
+};
+
+const initializeSpawn = () => {
+  let firstSpawn = randomSpawn();
+  let secondSpawn = randomSpawn();
+  while (firstSpawn === secondSpawn) {
+    firstSpawn = randomSpawn();
+    secondSpawn = randomSpawn();
+  }
+
+  document.getElementById(`${firstSpawn}`).innerHTML = '2';
+  document.getElementById(`${secondSpawn}`).innerHTML = randomValue();
+};
+const randomSpawn = () => {
+  let i, j;
+  i = Math.floor(Math.random() * size - min);
+  j = Math.floor(Math.random() * size - min);
+  return `${i}${j}`;
+};
+
+const randomValue = () => {
+  const value = ['2', '4'];
+  let randomValue = value[Math.floor(Math.random() * 2)];
+  return randomValue;
+};
+
+const setColorCellOnField = () => {
+  for (let i = 0; i <= max; i++) {
+    for (let j = 0; j <= max; j++) {
+      document.getElementById(`${i}${j}`).style.backgroundColor = getColor(
+        parseInt(document.getElementById(`${i}${j}`).innerHTML)
+      );
+    }
+  }
+};
+const load = () => {
+  createCellOnField();
+  setScore();
+  initializeSpawn();
+  setColorCellOnField();
+};
+
+const playGame = (event) => {
+  switch (event.keyCode) {
+    case 37:
+      console.log('left');
+      break;
+    case 38:
+      console.log('up');
+      break;
+    case 39:
+      console.log('right');
+      break;
+    case 40:
+      console.log('down');
+      break;
+  }
+};
 load();
