@@ -1,0 +1,35 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #FCE2DB;
+    margin: 0;
+    align-items: center;
+    justify-content: space-around;
+    height: 100vh;
+}
+
+
+#canvas {
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    grid-template-rows: repeat(4, 80px);
+}
+
+#score-board {
+    display: flex;
+    flex-direction: column;
+}
+
+#score {
+    display: flex;
+    justify-content: center;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2vmin;
+}
