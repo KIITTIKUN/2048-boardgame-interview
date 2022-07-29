@@ -3,7 +3,6 @@ const size = 4;
 let max = size - 1;
 let exclude = [];
 let score = 0;
-let isMove = false;
 
 const getColor = (value) => {
   let color;
@@ -69,22 +68,22 @@ const setScore = () => {
   document.getElementById('score').innerHTML = score;
 };
 
-const initializeSpawn = () => {
-  let firstSpawn = randomSpawn();
-  let secondSpawn = randomSpawn();
-  while (firstSpawn === secondSpawn) {
-    firstSpawn = randomSpawn();
-    secondSpawn = randomSpawn();
-  }
-
-  document.getElementById(`${firstSpawn}`).innerHTML = '2';
-  document.getElementById(`${secondSpawn}`).innerHTML = randomValue();
-};
 const randomSpawn = () => {
   let i, j;
   i = Math.floor(Math.random() * size - min);
   j = Math.floor(Math.random() * size - min);
   return `${i}${j}`;
+};
+
+const initializeSpawn = () => {
+  let firstSpawn = randomSpawn();
+  let secondSpawn = randomSpawn();
+  while (firstSpawn === secondSpawn) {
+    secondSpawn = randomSpawn();
+  }
+
+  document.getElementById(`${firstSpawn}`).innerHTML = '2';
+  document.getElementById(`${secondSpawn}`).innerHTML = randomValue();
 };
 
 const randomValue = () => {
@@ -109,7 +108,8 @@ const load = () => {
   setColorCellOnField();
 };
 
-const playGame = (event) => {
+const getEventKeydown = (event) => {
+  event.preventDefault();
   switch (event.keyCode) {
     case 37:
       console.log('left');
@@ -125,4 +125,5 @@ const playGame = (event) => {
       break;
   }
 };
+
 load();
