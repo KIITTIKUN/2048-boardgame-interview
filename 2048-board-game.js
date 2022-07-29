@@ -103,6 +103,24 @@ const setColorCellOnField = () => {
   }
 };
 
+const newSpawn = () => {
+  const canSpawn = [];
+  for (let i = 0; i <= max; i++) {
+    for (let j = 0; j <= max; j++) {
+      if (document.getElementById(`${i}${j}`).innerHTML === '') {
+        canSpawn.push(`${i}${j}`);
+      }
+    }
+  }
+  let spawn = randomSpawn();
+  while (canSpawn.indexOf(spawn) === -1) {
+    spawn = randomSpawn();
+  }
+  document.getElementById(spawn).innerHTML = randomValue();
+  setColorCellOnField();
+  isMove = false;
+};
+
 const load = () => {
   createCellOnField();
   setScore();
@@ -115,13 +133,14 @@ const moveUp = (id) => {
   let j = parseInt(id[1]);
   if (i === min) {
     console.log(`not up = ${i}${j}`);
-    return false;
+    return (isMove = false);
   } else {
     for (let move = i - 1; move >= min; move--) {
       if (document.getElementById(`${move}${j}`).innerHTML === '') {
         document.getElementById(`${move}${j}`).innerHTML =
           document.getElementById(`${i}${j}`).innerHTML;
         document.getElementById(`${i}${j}`).innerHTML = '';
+        isMove = true;
       } else if (
         document.getElementById(`${move}${j}`).innerHTML ===
         document.getElementById(`${i}${j}`).innerHTML
@@ -137,6 +156,9 @@ const moveUp = (id) => {
           document.getElementById(`${move}${j}`).innerHTML = `${change}`;
           document.getElementById(`${i}${j}`).innerHTML = '';
           exclude.push(`${change}`);
+          score += change;
+          setScore();
+          isMove = true;
         }
       }
       console.log(`exclude = ${exclude}`);
@@ -155,6 +177,9 @@ const up = () => {
       moveUp(`${i}${j}`);
     }
   }
+  if (isMove) {
+    newSpawn();
+  }
 };
 
 const moveDown = (id) => {
@@ -169,6 +194,7 @@ const moveDown = (id) => {
         document.getElementById(`${move}${j}`).innerHTML =
           document.getElementById(`${i}${j}`).innerHTML;
         document.getElementById(`${i}${j}`).innerHTML = '';
+        isMove = true;
       } else if (
         document.getElementById(`${move}${j}`).innerHTML ===
         document.getElementById(`${i}${j}`).innerHTML
@@ -183,6 +209,9 @@ const moveDown = (id) => {
           document.getElementById(`${move}${j}`).innerHTML = `${change}`;
           document.getElementById(`${i}${j}`).innerHTML = '';
           exclude.push(`${change}`);
+          score += change;
+          setScore();
+          isMove = true;
         }
       }
       console.log(`exclude = ${exclude}`);
@@ -201,6 +230,9 @@ const down = () => {
       moveDown(`${i}${j}`);
     }
   }
+  if (isMove) {
+    newSpawn();
+  }
 };
 
 const moveLeft = (id) => {
@@ -208,13 +240,14 @@ const moveLeft = (id) => {
   let j = parseInt(id[1]);
   if (j === min) {
     console.log(`not left = ${i}${j}`);
-    return false;
+    return (isMove = false);
   } else {
     for (let move = j - 1; move >= min; move--) {
       if (document.getElementById(`${i}${move}`).innerHTML === '') {
         document.getElementById(`${i}${move}`).innerHTML =
           document.getElementById(`${i}${j}`).innerHTML;
         document.getElementById(`${i}${j}`).innerHTML = '';
+        isMove = true;
       } else if (
         document.getElementById(`${i}${move}`).innerHTML ===
         document.getElementById(`${i}${j}`).innerHTML
@@ -229,6 +262,9 @@ const moveLeft = (id) => {
           document.getElementById(`${i}${move}`).innerHTML = `${change}`;
           document.getElementById(`${i}${j}`).innerHTML = '';
           exclude.push(`${change}`);
+          score += change;
+          setScore();
+          isMove = true;
         }
       }
       console.log(`exclude = ${exclude}`);
@@ -247,19 +283,24 @@ const left = () => {
       moveLeft(`${i}${j}`);
     }
   }
+  if (isMove) {
+    newSpawn();
+  }
 };
+
 const moveRight = (id) => {
   let i = parseInt(id[0]);
   let j = parseInt(id[1]);
   if (j === max) {
     console.log(`not Right = ${i}${j}`);
-    return false;
+    return (isMove = false);
   } else {
     for (let move = j + 1; move <= max; move++) {
       if (document.getElementById(`${i}${move}`).innerHTML === '') {
         document.getElementById(`${i}${move}`).innerHTML =
           document.getElementById(`${i}${j}`).innerHTML;
         document.getElementById(`${i}${j}`).innerHTML = '';
+        isMove = true;
       } else if (
         document.getElementById(`${i}${move}`).innerHTML ===
         document.getElementById(`${i}${j}`).innerHTML
@@ -274,6 +315,9 @@ const moveRight = (id) => {
           document.getElementById(`${i}${move}`).innerHTML = `${change}`;
           document.getElementById(`${i}${j}`).innerHTML = '';
           exclude.push(`${change}`);
+          score += change;
+          setScore();
+          isMove = true;
         }
       }
       console.log(`exclude = ${exclude}`);
@@ -291,6 +335,9 @@ const right = () => {
       console.log(`send = ${i}${j}`);
       moveRight(`${i}${j}`);
     }
+  }
+  if (isMove) {
+    newSpawn();
   }
 };
 
