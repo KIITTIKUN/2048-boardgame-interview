@@ -3,6 +3,7 @@ const size = 4;
 let max = size - 1;
 let exclude = [];
 let score = 0;
+let isMove = false;
 
 const getColor = (value) => {
   let color;
@@ -101,6 +102,7 @@ const setColorCellOnField = () => {
     }
   }
 };
+
 const load = () => {
   createCellOnField();
   setScore();
@@ -108,20 +110,204 @@ const load = () => {
   setColorCellOnField();
 };
 
-document.body.addEventListener('keydown', (event) => {
+const moveUp = (id) => {
+  let i = parseInt(id[0]);
+  let j = parseInt(id[1]);
+  if (i === min) {
+    console.log(`not up = ${i}${j}`);
+    return false;
+  } else {
+    for (let move = i - 1; move >= min; move--) {
+      if (document.getElementById(`${move}${j}`).innerHTML === '') {
+        document.getElementById(`${move}${j}`).innerHTML =
+          document.getElementById(`${i}${j}`).innerHTML;
+        document.getElementById(`${i}${j}`).innerHTML = '';
+      } else if (
+        document.getElementById(`${move}${j}`).innerHTML ===
+        document.getElementById(`${i}${j}`).innerHTML
+      ) {
+        let change =
+          parseInt(document.getElementById(`${move}${j}`).innerHTML) +
+          parseInt(document.getElementById(`${i}${j}`).innerHTML);
+        if (
+          exclude.indexOf(
+            document.getElementById(`${move}${j}`).innerHTML === -1
+          )
+        ) {
+          document.getElementById(`${move}${j}`).innerHTML = `${change}`;
+          document.getElementById(`${i}${j}`).innerHTML = '';
+          exclude.push(`${change}`);
+        }
+      }
+      console.log(`exclude = ${exclude}`);
+      console.log(`up = ${i}${j} to ${move}${j}`);
+      i--;
+    }
+    setColorCellOnField();
+  }
+};
+
+const up = () => {
+  exclude = [];
+  for (let i = min; i <= max; i++) {
+    for (let j = min; j <= max; j++) {
+      console.log(`send = ${i}${j}`);
+      moveUp(`${i}${j}`);
+    }
+  }
+};
+
+const moveDown = (id) => {
+  let i = parseInt(id[0]);
+  let j = parseInt(id[1]);
+  if (i === max) {
+    console.log(`not down = ${i}${j}`);
+    return (isMove = false);
+  } else {
+    for (let move = i + 1; move <= max; move++) {
+      if (document.getElementById(`${move}${j}`).innerHTML === '') {
+        document.getElementById(`${move}${j}`).innerHTML =
+          document.getElementById(`${i}${j}`).innerHTML;
+        document.getElementById(`${i}${j}`).innerHTML = '';
+      } else if (
+        document.getElementById(`${move}${j}`).innerHTML ===
+        document.getElementById(`${i}${j}`).innerHTML
+      ) {
+        let change =
+          parseInt(document.getElementById(`${move}${j}`).innerHTML) +
+          parseInt(document.getElementById(`${i}${j}`).innerHTML);
+        if (
+          exclude.indexOf(document.getElementById(`${move}${j}`).innerHTML) ===
+          -1
+        ) {
+          document.getElementById(`${move}${j}`).innerHTML = `${change}`;
+          document.getElementById(`${i}${j}`).innerHTML = '';
+          exclude.push(`${change}`);
+        }
+      }
+      console.log(`exclude = ${exclude}`);
+      console.log(`down = ${i}${j} to ${move}${j}`);
+      i++;
+    }
+    setColorCellOnField();
+  }
+};
+
+const down = () => {
+  exclude = [];
+  for (let i = max; i >= min; i--) {
+    for (let j = min; j <= max; j++) {
+      console.log(`send = ${i}${j}`);
+      moveDown(`${i}${j}`);
+    }
+  }
+};
+
+const moveLeft = (id) => {
+  let i = parseInt(id[0]);
+  let j = parseInt(id[1]);
+  if (j === min) {
+    console.log(`not left = ${i}${j}`);
+    return false;
+  } else {
+    for (let move = j - 1; move >= min; move--) {
+      if (document.getElementById(`${i}${move}`).innerHTML === '') {
+        document.getElementById(`${i}${move}`).innerHTML =
+          document.getElementById(`${i}${j}`).innerHTML;
+        document.getElementById(`${i}${j}`).innerHTML = '';
+      } else if (
+        document.getElementById(`${i}${move}`).innerHTML ===
+        document.getElementById(`${i}${j}`).innerHTML
+      ) {
+        let change =
+          parseInt(document.getElementById(`${i}${move}`).innerHTML) +
+          parseInt(document.getElementById(`${i}${j}`).innerHTML);
+        if (
+          exclude.indexOf(document.getElementById(`${i}${move}`).innerHTML) ===
+          -1
+        ) {
+          document.getElementById(`${i}${move}`).innerHTML = `${change}`;
+          document.getElementById(`${i}${j}`).innerHTML = '';
+          exclude.push(`${change}`);
+        }
+      }
+      console.log(`exclude = ${exclude}`);
+      console.log(`left = ${i}${j} to ${i}${move}`);
+      j--;
+    }
+    setColorCellOnField();
+  }
+};
+
+const left = () => {
+  exclude = [];
+  for (let i = min; i <= max; i++) {
+    for (let j = min; j <= max; j++) {
+      console.log(`send = ${i}${j}`);
+      moveLeft(`${i}${j}`);
+    }
+  }
+};
+const moveRight = (id) => {
+  let i = parseInt(id[0]);
+  let j = parseInt(id[1]);
+  if (j === max) {
+    console.log(`not Right = ${i}${j}`);
+    return false;
+  } else {
+    for (let move = j + 1; move <= max; move++) {
+      if (document.getElementById(`${i}${move}`).innerHTML === '') {
+        document.getElementById(`${i}${move}`).innerHTML =
+          document.getElementById(`${i}${j}`).innerHTML;
+        document.getElementById(`${i}${j}`).innerHTML = '';
+      } else if (
+        document.getElementById(`${i}${move}`).innerHTML ===
+        document.getElementById(`${i}${j}`).innerHTML
+      ) {
+        let change =
+          parseInt(document.getElementById(`${i}${move}`).innerHTML) +
+          parseInt(document.getElementById(`${i}${j}`).innerHTML);
+        if (
+          exclude.indexOf(document.getElementById(`${i}${move}`).innerHTML) ===
+          -1
+        ) {
+          document.getElementById(`${i}${move}`).innerHTML = `${change}`;
+          document.getElementById(`${i}${j}`).innerHTML = '';
+          exclude.push(`${change}`);
+        }
+      }
+      console.log(`exclude = ${exclude}`);
+      console.log(`right = ${i}${j} to ${i}${move}`);
+      j++;
+    }
+    setColorCellOnField();
+  }
+};
+
+const right = () => {
+  exclude = [];
+  for (let i = min; i <= max; i++) {
+    for (let j = max; j >= min; j--) {
+      console.log(`send = ${i}${j}`);
+      moveRight(`${i}${j}`);
+    }
+  }
+};
+
+document.addEventListener('keydown', (event) => {
   event.preventDefault();
   switch (event.keyCode) {
     case 37:
-      console.log('left');
+      left();
       break;
     case 38:
-      console.log('up');
+      up();
       break;
     case 39:
-      console.log('right');
+      right();
       break;
     case 40:
-      console.log('down');
+      down();
       break;
   }
 });
