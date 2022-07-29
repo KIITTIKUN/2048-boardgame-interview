@@ -108,7 +108,7 @@ const load = () => {
   setColorCellOnField();
 };
 
-const getEventKeydown = (event) => {
+document.body.addEventListener('keydown', (event) => {
   event.preventDefault();
   switch (event.keyCode) {
     case 37:
@@ -124,6 +124,6 @@ const getEventKeydown = (event) => {
       console.log('down');
       break;
   }
-};
+});
 
 load();
