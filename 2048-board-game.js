@@ -277,8 +277,8 @@ const moveLeft = (id) => {
 
 const left = () => {
   exclude = [];
-  for (let i = min; i <= max; i++) {
-    for (let j = min; j <= max; j++) {
+  for (let j = min; j <= max; j++) {
+    for (let i = min; i <= max; i++) {
       console.log(`send = ${i}${j}`);
       moveLeft(`${i}${j}`);
     }
@@ -330,8 +330,8 @@ const moveRight = (id) => {
 
 const right = () => {
   exclude = [];
-  for (let i = min; i <= max; i++) {
-    for (let j = max; j >= min; j--) {
+  for (let j = max; j >= min; j--) {
+    for (let i = min; i <= max; i++) {
       console.log(`send = ${i}${j}`);
       moveRight(`${i}${j}`);
     }
