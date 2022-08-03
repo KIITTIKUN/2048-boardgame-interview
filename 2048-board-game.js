@@ -9,13 +9,13 @@ const getColor = (value) => {
   let color;
   switch (value) {
     case 0:
-      color = '#FFFFFF';
+      color = '#FFFF9F';
       break;
     case 2:
-      color = '#56367d';
+      color = '#bdc4de';
       break;
     case 4:
-      color = '#526cff';
+      color = '#abdecb';
       break;
     case 8:
       color = '#63ffff';
@@ -45,7 +45,7 @@ const getColor = (value) => {
       color = '#ff0803';
       break;
     default:
-      color = '#FFFFFF';
+      color = '#FFFF9F';
   }
   return color;
 };
@@ -225,7 +225,7 @@ const moveDown = (id) => {
 const down = () => {
   exclude = [];
   for (let i = max; i >= min; i--) {
-    for (let j = min; j <= max; j++) {
+    for (let j = max; j >= min; j--) {
       console.log(`send = ${i}${j}`);
       moveDown(`${i}${j}`);
     }

@@ -1,7 +1,7 @@
 body {
     display: flex;
     flex-direction: column;
-    background-color: #FCE2DB;
+    background-color: #ffffff;
     margin: 0;
     align-items: center;
     justify-content: space-around;
@@ -13,6 +13,8 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 80px);
     grid-template-rows: repeat(4, 80px);
+    background-color: #161616;
+    border-radius: 2vmin;
 }
 
 #score-board {
@@ -30,6 +32,7 @@ body {
     justify-content: center;
     align-items: center;
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
     border-radius: 2vmin;
+    border-color: #161616;
 }
