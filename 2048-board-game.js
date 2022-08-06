@@ -132,7 +132,6 @@ const moveUp = (id) => {
   let i = parseInt(id[0]);
   let j = parseInt(id[1]);
   if (i === min) {
-    console.log(`not up = ${i}${j}`);
     return (isMove = false);
   } else {
     for (let move = i - 1; move >= min; move--) {
@@ -148,21 +147,15 @@ const moveUp = (id) => {
         let change =
           parseInt(document.getElementById(`${move}${j}`).innerHTML) +
           parseInt(document.getElementById(`${i}${j}`).innerHTML);
-        if (
-          exclude.indexOf(
-            document.getElementById(`${move}${j}`).innerHTML === -1
-          )
-        ) {
+        if (exclude.indexOf(`${move}${j}`) === -1) {
           document.getElementById(`${move}${j}`).innerHTML = `${change}`;
           document.getElementById(`${i}${j}`).innerHTML = '';
-          exclude.push(`${change}`);
+          exclude.push(`${move}${j}`);
           score += change;
           setScore();
           isMove = true;
         }
       }
-      console.log(`exclude = ${exclude}`);
-      console.log(`up = ${i}${j} to ${move}${j}`);
       i--;
     }
     setColorCellOnField();
@@ -173,7 +166,6 @@ const up = () => {
   exclude = [];
   for (let i = min; i <= max; i++) {
     for (let j = min; j <= max; j++) {
-      console.log(`send = ${i}${j}`);
       moveUp(`${i}${j}`);
     }
   }
@@ -186,7 +178,6 @@ const moveDown = (id) => {
   let i = parseInt(id[0]);
   let j = parseInt(id[1]);
   if (i === max) {
-    console.log(`not down = ${i}${j}`);
     return (isMove = false);
   } else {
     for (let move = i + 1; move <= max; move++) {
@@ -208,14 +199,12 @@ const moveDown = (id) => {
         ) {
           document.getElementById(`${move}${j}`).innerHTML = `${change}`;
           document.getElementById(`${i}${j}`).innerHTML = '';
-          exclude.push(`${change}`);
+          exclude.push(`${move}${j}`);
           score += change;
           setScore();
           isMove = true;
         }
       }
-      console.log(`exclude = ${exclude}`);
-      console.log(`down = ${i}${j} to ${move}${j}`);
       i++;
     }
     setColorCellOnField();
@@ -226,7 +215,6 @@ const down = () => {
   exclude = [];
   for (let i = max; i >= min; i--) {
     for (let j = max; j >= min; j--) {
-      console.log(`send = ${i}${j}`);
       moveDown(`${i}${j}`);
     }
   }
@@ -239,7 +227,6 @@ const moveLeft = (id) => {
   let i = parseInt(id[0]);
   let j = parseInt(id[1]);
   if (j === min) {
-    console.log(`not left = ${i}${j}`);
     return (isMove = false);
   } else {
     for (let move = j - 1; move >= min; move--) {
@@ -255,20 +242,15 @@ const moveLeft = (id) => {
         let change =
           parseInt(document.getElementById(`${i}${move}`).innerHTML) +
           parseInt(document.getElementById(`${i}${j}`).innerHTML);
-        if (
-          exclude.indexOf(document.getElementById(`${i}${move}`).innerHTML) ===
-          -1
-        ) {
+        if (exclude.indexOf(`${move}${j}`) === -1) {
           document.getElementById(`${i}${move}`).innerHTML = `${change}`;
           document.getElementById(`${i}${j}`).innerHTML = '';
-          exclude.push(`${change}`);
+          exclude.push(`${move}${j}`);
           score += change;
           setScore();
           isMove = true;
         }
       }
-      console.log(`exclude = ${exclude}`);
-      console.log(`left = ${i}${j} to ${i}${move}`);
       j--;
     }
     setColorCellOnField();
@@ -279,7 +261,6 @@ const left = () => {
   exclude = [];
   for (let j = min; j <= max; j++) {
     for (let i = min; i <= max; i++) {
-      console.log(`send = ${i}${j}`);
       moveLeft(`${i}${j}`);
     }
   }
@@ -292,7 +273,6 @@ const moveRight = (id) => {
   let i = parseInt(id[0]);
   let j = parseInt(id[1]);
   if (j === max) {
-    console.log(`not Right = ${i}${j}`);
     return (isMove = false);
   } else {
     for (let move = j + 1; move <= max; move++) {
@@ -308,20 +288,14 @@ const moveRight = (id) => {
         let change =
           parseInt(document.getElementById(`${i}${move}`).innerHTML) +
           parseInt(document.getElementById(`${i}${j}`).innerHTML);
-        if (
-          exclude.indexOf(document.getElementById(`${i}${move}`).innerHTML) ===
-          -1
-        ) {
+        if (exclude.indexOf(`${move}${j}`) === -1) {
           document.getElementById(`${i}${move}`).innerHTML = `${change}`;
           document.getElementById(`${i}${j}`).innerHTML = '';
-          exclude.push(`${change}`);
+          exclude.push(`${move}${j}`);
           score += change;
           setScore();
-          isMove = true;
         }
       }
-      console.log(`exclude = ${exclude}`);
-      console.log(`right = ${i}${j} to ${i}${move}`);
       j++;
     }
     setColorCellOnField();
@@ -332,7 +306,6 @@ const right = () => {
   exclude = [];
   for (let j = max; j >= min; j--) {
     for (let i = min; i <= max; i++) {
-      console.log(`send = ${i}${j}`);
       moveRight(`${i}${j}`);
     }
   }
