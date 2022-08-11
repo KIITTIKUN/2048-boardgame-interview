@@ -132,7 +132,8 @@ const moveUp = (id) => {
   let i = parseInt(id[0]);
   let j = parseInt(id[1]);
   if (i === min) {
-    return (isMove = false);
+    isMove = false;
+    return;
   } else {
     for (let move = i - 1; move >= min; move--) {
       if (document.getElementById(`${move}${j}`).innerHTML === '') {
@@ -178,7 +179,8 @@ const moveDown = (id) => {
   let i = parseInt(id[0]);
   let j = parseInt(id[1]);
   if (i === max) {
-    return (isMove = false);
+    isMove = false;
+    return;
   } else {
     for (let move = i + 1; move <= max; move++) {
       if (document.getElementById(`${move}${j}`).innerHTML === '') {
@@ -227,7 +229,8 @@ const moveLeft = (id) => {
   let i = parseInt(id[0]);
   let j = parseInt(id[1]);
   if (j === min) {
-    return (isMove = false);
+    isMove = false;
+    return;
   } else {
     for (let move = j - 1; move >= min; move--) {
       if (document.getElementById(`${i}${move}`).innerHTML === '') {
@@ -273,7 +276,8 @@ const moveRight = (id) => {
   let i = parseInt(id[0]);
   let j = parseInt(id[1]);
   if (j === max) {
-    return (isMove = false);
+    isMove = false;
+    return;
   } else {
     for (let move = j + 1; move <= max; move++) {
       if (document.getElementById(`${i}${move}`).innerHTML === '') {
