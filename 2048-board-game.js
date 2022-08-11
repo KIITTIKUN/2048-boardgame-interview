@@ -9,7 +9,7 @@ const getColor = (value) => {
   let color;
   switch (value) {
     case 0:
-      color = '#FFFF9F';
+      color = '#ffff9f';
       break;
     case 2:
       color = '#bdc4de';
@@ -45,7 +45,7 @@ const getColor = (value) => {
       color = '#ff0803';
       break;
     default:
-      color = '#FFFF9F';
+      color = '#ffff9f';
   }
   return color;
 };
